@@ -20,7 +20,9 @@ def analisar_CNPJ():
         exit(1)
 
     # Modelo de prompt para a análise de CNPJ
-    dados_CNPJ = """Como fritar um ovo?"""
+    dados_CNPJ = """
+    
+    """
 
     try:
         resposta = cliente.models.generate_content(

@@ -17,5 +17,5 @@ if __name__ == "__main__":
     # Realiza a criação do objeto Empresa definida em empresa.py se o resultado não for None
     empresa = Empresa(resultado)
 
-    analisar_CNPJ()
+    
  
