@@ -5,7 +5,7 @@ from google.genai import types
 
 
 
-def analisar_CNPJ():
+def analisar_CNPJ(analise: dict, dados_empresa : dict) -> None:
 
     # Carregar variáveis de ambiente do arquivo .env
     load_dotenv()
@@ -20,14 +20,15 @@ def analisar_CNPJ():
         exit(1)
 
     # Modelo de prompt para a análise de CNPJ
-    dados_CNPJ = """
-    
+    # O prompt irá utilizar as informações da análise preliminar e os dados da empresa para gerar uma resposta.
+    prompt = f"""
+        
     """
 
     try:
         resposta = cliente.models.generate_content(
             model="gemini-2.5-flash",
-            contents=dados_CNPJ
+            contents=prompt
         )
 
         print("Resposta do modelo Gemini:")
