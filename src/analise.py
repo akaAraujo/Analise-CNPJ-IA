@@ -11,15 +11,6 @@ def analisar_CNPJ(dados_cnpj: dict) -> dict:
 
     analise = {}
 
-    # Analise da situação cadastral da empresa, caso esteja entre os status de reprovação direta retorna reprovado.
-    # Caso contrário, adiciona a situação cadastral na análise como positiva.
-    situacao = dados_cnpj.get("situacao_cadastral", "").upper()
-    if situacao in STATUS_REPROVACAO_DIRETA:
-        analise["motivo_reprovacao"] = f"Empresa com situação cadastral '{situacao}'"
-        return {"status_preliminar": "Reprovado", "analise": analise}
-    else:
-        analise["situacao_cadastral"] = f"Positivo, empresa com situação cadastral '{situacao}'"
-    
     # Analise do CNAE principal da empresa, caso esteja fora da lista de CNAEs permitidos retorna reprovado.
     # Caso esteja na lista, é retornado a aprovação.
     cnae_principal = dados_cnpj.get("cnae_principal", "")
@@ -28,13 +19,22 @@ def analisar_CNPJ(dados_cnpj: dict) -> dict:
         return {"status_preliminar": "Reprovado", "analise": analise}
     else:
         analise["cnae_principal"] = f"CNAE principal '{cnae_principal}' condizente com a operação de educação."
-    
+
+    # Analise da situação cadastral da empresa, caso esteja entre os status de reprovação direta retorna reprovado.
+    # Caso contrário, adiciona a situação cadastral na análise como positiva.
+    situacao = dados_cnpj.get("situacao_cadastral", "").upper()
+    if situacao in STATUS_REPROVACAO_DIRETA:
+        analise["motivo_reprovacao"] = f"Empresa com situação cadastral '{situacao}'"
+        return {"status_preliminar": "Reprovado", "analise": analise}
+    else:
+        analise["situacao_cadastral"] = f"Positivo, empresa com situação cadastral '{situacao}'"
+
     # Caso a empresa passe pelas analises preliminares ela segue para a próxima etapa de análise.
     pontos_positivos = 0
     pontos_atencao = 0
 
     # Analise do tempo de atividade da empresa
-    #Caso a empresa tenha 2 anos ou mais de atividade, soma 1 ponto positivo, caso contrário soma 1 ponto de atenção.
+    # Caso a empresa tenha 2 anos ou mais de atividade, soma 1 ponto positivo, caso contrário soma 1 ponto de atenção.
     tempo_atividade = dados_cnpj.get("idade_empresa", 0)
     if tempo_atividade >= 2:
         pontos_positivos += 1
@@ -42,7 +42,6 @@ def analisar_CNPJ(dados_cnpj: dict) -> dict:
     else:
         pontos_atencao += 1
         analise["tempo_atividade"] = f"Atenção, empresa com {tempo_atividade} anos de atividade."
-    
 
     # Analise do capital social da empresa
     # Caso o capital social seja igual ou maior que R$ 100.000,00 soma 1 ponto positivo, caso contrário soma 1 ponto de atenção.
@@ -53,7 +52,6 @@ def analisar_CNPJ(dados_cnpj: dict) -> dict:
     else:
         pontos_atencao += 1
         analise["capital_social"] = f"Atenção, capital social de R$ {capital_social:.2f}."
-    
 
     # Resultado da análise preliminar
     # Caso a empresa tenha somado apenas pontos positivos, retorna aprovado.
@@ -64,5 +62,5 @@ def analisar_CNPJ(dados_cnpj: dict) -> dict:
         status_final = "Atenção"
     else:
         status_final = "Atenção"
-    
+
     return {"status_preliminar": status_final, "analise": analise}
