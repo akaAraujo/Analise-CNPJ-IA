@@ -11,7 +11,7 @@ def consulta_cnpj(cnpj: str):
     url = f"https://api.opencnpj.org/{cnpj}"
 
     try:
-        response = requests.get(url, timeout=10, verify=False)
+        response = requests.get(url, timeout=10)
         response.raise_for_status()
         print("A requisição foi bem-sucedida.")
 

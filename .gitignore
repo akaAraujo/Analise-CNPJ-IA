@@ -7,3 +7,4 @@ venv/
 # Arquivos de bytecode Python
 __pycache__/
 *.pyc
+pyvenv.cfg
