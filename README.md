@@ -2,7 +2,7 @@
 
 ## 🎯 Objetivo
 
-O projeto tem como objetivo automatizar a análise de CNPJs de Instituições de Ensino, avaliando suas informações cadastrais e financeiras para identificar se estão qualificadas a atuar em operações de gestão de recebíveis e financiamento estudantil.
+O projeto tem como objetivo automatizar a análise de CNPJs de Instituições de Ensino, avaliando suas informações cadastrais e financeiras para identificar se estão qualificadas a atuar em operações de gestão de recebíveis e financiamento estudantil. O repositório possui uma versão abreviada da arquitetura sugerida, onde o CNPJ é consultado através da API da OpenCNPJ, tem suas informações normalizadas e logo após é submetido ao teste das informações, caso o CNPJ seja Aprovado ou Reprovado a análise será finalizada, caso ele seja definido como Atenção ele será submetido a uma análise da Gemini. Posteriormente serão realizadas alterações no projeto aplicando a arquitetura sugerida.
 
 ## ⚖️ Critérios de Avaliação
 
