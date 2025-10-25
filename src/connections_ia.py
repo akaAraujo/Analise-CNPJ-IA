@@ -39,9 +39,11 @@ def analista_ia(analise: dict, dados_empresa: dict) -> None:
         2. Ponderação de Risco: Pese os riscos (como baixo tempo de atividade) contra os pontos positivos (capital social ou nome muito específico de educação).
         3. Retorne APENAS informações essências para a tomada de decisão.
 
-        Exemplo de Saída:
-        Veredicto final": [Aprovado|Reprovado|Atenção]
-        Resultado da analise: Apesar do Capital Social ser positivo, o Tempo de Atividade é inferior a 2 anos (risco). Além disso, o Nome Fantasia é muito genérico ('Serviços LTDA'), o que levanta dúvidas sobre o foco educacional mesmo com o CNAE compatível. Não Aprovado automaticamente.
+        # Exemplo de Saída (Obrigatoriamente JSON):
+        {{
+        "Veredicto final": "[Aprovado|Reprovado|Atenção]",
+        "Resultado da analise": "Apesar do Capital Social ser positivo, o Tempo de Atividade é inferior a 2 anos (risco). Além disso, o Nome Fantasia é muito genérico ('Serviços LTDA'), o que levanta dúvidas sobre o foco educacional mesmo com o CNAE compatível. Não Aprovado automaticamente."
+        }}
     """
 
     try:
